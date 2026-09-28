@@ -1,0 +1,1 @@
+KERNEL=="virtualsensor", SUBSYSTEM=="virtualsensor", MODE="0666", GROUP="plugdev"

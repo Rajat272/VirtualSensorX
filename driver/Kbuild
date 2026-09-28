@@ -1,0 +1,2 @@
+obj-m += virtualsensor.o
+virtualsensor-objs := vsensor_main.o vsensor_fops.o vsensor_ioctl.o vsensor_ringbuf.o vsensor_gen.o vsensor_state.o

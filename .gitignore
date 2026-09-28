@@ -1,0 +1,17 @@
+# Build outputs
+build/
+userspace/build/
+*.o
+*.ko
+*.mod
+*.mod.c
+*.symvers
+*.order
+.tmp_versions/
+.*.cmd
+.virtualsensor*
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store

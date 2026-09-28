@@ -1,0 +1,33 @@
+name: VirtualSensorX CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake linux-headers-$(uname -r)
+
+    - name: Build Driver (Compile Check)
+      run: |
+        make -C driver W=1 || true
+
+    - name: Build Userspace & Run C++ Tests
+      run: |
+        cmake -S userspace -B userspace/build
+        cmake --build userspace/build -j
+        ctest --test-dir userspace/build --output-on-failure
+
+    - name: Run CLI Mock Self-Test
+      run: |
+        ./userspace/build/vsctl --mock test
